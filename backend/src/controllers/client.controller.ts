@@ -8,7 +8,7 @@ import {
 
 export class ClientController {
   // Público: registro de cliente
-  async register(req: Request<{}, {}, CreateClientInput>, res: Response) {
+  async register(req: Request<object, object,CreateClientInput>, res: Response) {
     const result = await clientService.create(req.body);
     res.status(201).json(result);
   }
@@ -26,7 +26,7 @@ export class ClientController {
   }
 
   // Admin: atualizar cliente
-  async updateByAdmin(req: Request<{ id: string }, {}, UpdateClientByAdminInput>, res: Response) {
+  async updateByAdmin(req: Request<{ id: string }, object, UpdateClientByAdminInput>, res: Response) {
     const result = await clientService.updateByAdmin(req.params.id, req.body);
     res.json(result);
   }
@@ -38,7 +38,7 @@ export class ClientController {
   }
 
   // Cliente: atualizar próprio perfil
-  async updateProfile(req: Request<{}, {}, UpdateClientInput>, res: Response) {
+  async updateProfile(req: Request<object, object,UpdateClientInput>, res: Response) {
     const { userId } = req.user!;
     const result = await clientService.update(userId, req.body);
     res.json(result);

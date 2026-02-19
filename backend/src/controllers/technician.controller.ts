@@ -8,7 +8,7 @@ import {
 
 export class TechnicianController {
   // Admin: criar técnico
-  async create(req: Request<{}, {}, CreateTechnicianInput>, res: Response) {
+  async create(req: Request<object, object,CreateTechnicianInput>, res: Response) {
     const result = await technicianService.create(req.body);
     res.status(201).json(result);
   }
@@ -26,13 +26,13 @@ export class TechnicianController {
   }
 
   // Admin: atualizar técnico
-  async update(req: Request<{ id: string }, {}, UpdateTechnicianInput>, res: Response) {
+  async update(req: Request<{ id: string }, object, UpdateTechnicianInput>, res: Response) {
     const result = await technicianService.update(req.params.id, req.body);
     res.json(result);
   }
 
   // Técnico: atualizar próprio perfil
-  async updateProfile(req: Request<{}, {}, UpdateTechnicianProfileInput>, res: Response) {
+  async updateProfile(req: Request<object, object,UpdateTechnicianProfileInput>, res: Response) {
     const { userId } = req.user!;
     const result = await technicianService.updateProfile(userId, req.body);
     res.json(result);

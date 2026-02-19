@@ -4,7 +4,7 @@ import { CreateServiceInput, UpdateServiceInput } from '../schemas/service.schem
 
 export class ServiceController {
   // Admin: criar serviço
-  async create(req: Request<{}, {}, CreateServiceInput>, res: Response) {
+  async create(req: Request<object, object, CreateServiceInput>, res: Response) {
     const result = await serviceService.create(req.body);
     res.status(201).json(result);
   }
@@ -28,7 +28,7 @@ export class ServiceController {
   }
 
   // Admin: atualizar serviço
-  async update(req: Request<{ id: string }, {}, UpdateServiceInput>, res: Response) {
+  async update(req: Request<{ id: string }, object, UpdateServiceInput>, res: Response) {
     const result = await serviceService.update(req.params.id, req.body);
     res.json(result);
   }

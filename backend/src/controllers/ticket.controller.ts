@@ -8,7 +8,7 @@ import {
 
 export class TicketController {
   // Cliente: criar chamado
-  async create(req: Request<{}, {}, CreateTicketInput>, res: Response) {
+  async create(req: Request<object, object,CreateTicketInput>, res: Response) {
     const { userId } = req.user!;
     const result = await ticketService.create(userId, req.body);
     res.status(201).json(result);
@@ -41,7 +41,7 @@ export class TicketController {
   }
 
   // Admin/Técnico: atualizar status do chamado
-  async updateStatus(req: Request<{ id: string }, {}, UpdateTicketStatusInput>, res: Response) {
+  async updateStatus(req: Request<{ id: string }, object, UpdateTicketStatusInput>, res: Response) {
     const { userId, role } = req.user!;
     const isAdmin = role === 'ADMIN';
     const result = await ticketService.updateStatus(req.params.id, req.body, userId, isAdmin);
@@ -49,7 +49,7 @@ export class TicketController {
   }
 
   // Técnico: adicionar serviço ao chamado
-  async addService(req: Request<{ id: string }, {}, AddServiceToTicketInput>, res: Response) {
+  async addService(req: Request<{ id: string }, object, AddServiceToTicketInput>, res: Response) {
     const { userId } = req.user!;
     const result = await ticketService.addService(req.params.id, req.body, userId);
     res.json(result);
